@@ -24,7 +24,7 @@ function App() {
     <div>loading</div>
   ) : (
     <div>
-      <Restaurant name={name} />
+      <Restaurant restaurantInfo={data.restaurant} />
 
       {/* <div className="restaurant">
         <div>
