@@ -6,17 +6,22 @@ import logo from "./assets/image/logo.png";
 function App() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [cart, setCart] = useState([]);
+
+  const handeAddToCart = (item) => {
+    const newCart = [...cart];
+    newCart.push({ title: item.title, price: item.price });
+    setCart(newCart);
+    console.log("======>", item);
+    return console.log(newCart);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
         "https://deliveroo-backend-lothaire.herokuapp.com/"
       );
-      // console.log("===>", response.data);
-
       setData(response.data);
-      // console.log(data);
-
       setIsLoading(false);
     };
     fetchData();
@@ -45,9 +50,16 @@ function App() {
                     <h2>{category.name}</h2>
                     <div className="category">
                       {category.meals.map((meal, deudex) => {
-                        console.log("=======>", meal.name);
                         return (
-                          <div className="plates" key={deudex}>
+                          // ici!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                          <div
+                            className="plates"
+                            onClick={() => {
+                              handeAddToCart(meal);
+                            }}
+                            key={deudex}
+                          >
                             <div className="plates-text">
                               <div className="plates-sub-text">
                                 <h3>{meal.title}</h3>
@@ -69,14 +81,31 @@ function App() {
                         );
                       })}
                     </div>
-                    {/* <p key={index}>{category.meals} </p> */}
                   </div>
                 )
               );
             })}
           </div>
         </div>
-        <div className="container-2">Mon panier</div>
+        <div className="container-2">
+          <div className="cart">
+            {cart.map((shoppingCart, index3) => {
+              console.log(shoppingCart);
+              return cart.length < 1 ? (
+                <div>
+                  <p>what I really want !</p>
+                </div>
+              ) : (
+                <div key={index3}>
+                  <div>
+                    <p>{shoppingCart.title}</p>
+                    <p>{shoppingCart.price}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

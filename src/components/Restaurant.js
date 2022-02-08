@@ -1,5 +1,4 @@
 const Restaurant = (props) => {
-  console.log(props);
   return (
     <div className="restaurant-info">
       <div className="restaurant-info-text">

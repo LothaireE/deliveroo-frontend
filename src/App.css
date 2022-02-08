@@ -53,6 +53,7 @@ p {
 }
 .container-2 {
   flex: 1;
+  background-color: white;
   border: chartreuse 3px solid;
   height: 300px;
   width: 250px;
@@ -104,10 +105,12 @@ p {
   flex-wrap: wrap;
 }
 
+/* par ici ! */
+
 .plates {
   width: 49%;
   margin-bottom: 20px;
-  /* border: chartreuse dashed 2px; */
+  border: chartreuse dashed 2px;
 
   gap: 10px;
   box-sizing: border-box;
@@ -122,6 +125,9 @@ p {
   cursor: pointer;
   transition-duration: 0.3s;
 }
+/* .plates:hover{
+
+} */
 .plates-info {
   /* flex: 1; */
   margin-right: 15px;
@@ -171,4 +177,7 @@ p {
 
 .what {
   box-sizing: border-box;
+}
+.cart {
+  background-color: white;
 }
