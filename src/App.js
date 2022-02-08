@@ -2,6 +2,7 @@ import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Restaurant from "./components/Restaurant";
+import logo from "./assets/image/logo.png";
 function App() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,48 +24,59 @@ function App() {
   return isLoading ? (
     <div>loading</div>
   ) : (
-    <div>
-      <Restaurant restaurantInfo={data.restaurant} />
-
-      {/* <div className="restaurant">
-        <div>
-          <h1>{data.restaurant.name}</h1>
-          <p>{data.restaurant.description}</p>
+    <div className="app">
+      <header>
+        <div className="top-bar">
+          <div className="top-bar-center">
+            <img className="logo" src={logo} alt="" />
+          </div>
         </div>
+        <div>
+          <Restaurant restaurantInfo={data.restaurant} />
+        </div>
+      </header>
+      <div className="containers">
+        <div className="container-1">
+          <div className="what">
+            {data.categories.map((category, index) => {
+              return (
+                category.meals.length > 0 && (
+                  <div className="categories" key={index}>
+                    <h2>{category.name}</h2>
+                    <div className="category">
+                      {category.meals.map((meal, deudex) => {
+                        console.log("=======>", meal.name);
+                        return (
+                          <div className="plates" key={deudex}>
+                            <div className="plates-text">
+                              <div className="plates-sub-text">
+                                <h3>{meal.title}</h3>
+                                <p>{meal.description} </p>
+                              </div>
 
-        <img
-          className="restaurant-picture"
-          src={data.restaurant.picture}
-          alt="restaurant"
-        />
-      </div> */}
+                              <div className="plates-info">
+                                <span>{meal.price} €</span>
+                                {meal.popular && <span>etoile</span>}
+                              </div>
+                            </div>
 
-      <div>
-        {data.categories.map((category, index) => {
-          console.log(category);
-          // console.log("çaaaaaaaa", category.meals);
-          return (
-            <div className="categories" key={index}>
-              <p>{category.name} </p>
-              <div>
-                {category.meals.map((meal, deudex) => {
-                  console.log("=======>", meal.name);
-                  return (
-                    <div className="plates" key={deudex}>
-                      <p>{meal.title}</p>
-                      <p>{meal.description} </p>
-                      <p>{meal.price}</p>
-                      <div>
-                        <img src={meal.picture} alt="" />
-                      </div>
+                            {meal.picture && (
+                              <div className="plates-img">
+                                <img src={meal.picture} alt="" />
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
-                  );
-                })}
-              </div>
-              {/* <p key={index}>{category.meals} </p> */}
-            </div>
-          );
-        })}
+                    {/* <p key={index}>{category.meals} </p> */}
+                  </div>
+                )
+              );
+            })}
+          </div>
+        </div>
+        <div className="container-2">Mon panier</div>
       </div>
     </div>
   );

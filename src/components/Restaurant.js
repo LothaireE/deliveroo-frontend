@@ -1,14 +1,14 @@
 const Restaurant = (props) => {
   console.log(props);
   return (
-    <div className="restaurant">
-      <div>
+    <div className="restaurant-info">
+      <div className="restaurant-info-text">
         <h1>{props.restaurantInfo.name}</h1>
         <p>{props.restaurantInfo.description}</p>
       </div>
 
       <img
-        className="restaurant-picture"
+        className="restaurant-info-picture"
         src={props.restaurantInfo.picture}
         alt="restaurant"
       />
