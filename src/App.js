@@ -75,38 +75,6 @@ function App() {
                             className="plates"
                             onClick={() => {
                               handleAddToCart(meal);
-                              // const newCart = [...cart];
-                              // let isInCart = false;
-                              // for (let i = 0; i < cart.length; i++) {
-                              //   if (cart[i].id === meal.id) {
-                              //     console.log("test1");
-                              //     isInCart = true;
-                              //     newCart[i].quantity += 1;
-                              //     newCart[i].price =
-                              //       Number(newCart[i].price) +
-                              //       Number(meal.price);
-
-                              //     break;
-                              //   }
-                              // }
-                              // if (!isInCart) {
-                              //   newCart.push({
-                              //     title: meal.title,
-                              //     price: meal.price,
-                              //     quantity: 1,
-                              //     id: meal.id,
-                              //   });
-                              // }
-                              // setCart(newCart);
-                              //
-
-                              // newCart.push({
-                              //   title: meal.title,
-                              //   price: meal.price,
-                              //   quantity: 1,
-
-                              //   id: meal.id,
-                              // });
                             }}
                             key={deudex}
                           >
@@ -148,13 +116,21 @@ function App() {
               cart.map((meal, index3) => {
                 return (
                   <div key={index3}>
-                    <div></div>
+                    <div>
+                      <button
+                        onClick={() => {
+                          handleAddToCart(meal);
+                        }}
+                      >
+                        +
+                      </button>
+                      <p>{meal.quantity}</p>
+                      <button>-</button>
+                    </div>
 
                     <div>
                       <p>{meal.title}</p>
-                      <p>{meal.price}</p>
-                      <p>{meal.quantity}</p>
-                      {/* <p>{shoppingCart.quantity}</p> */}
+                      <p>{meal.price} €</p>
                     </div>
                   </div>
                 );
