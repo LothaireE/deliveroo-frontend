@@ -7,7 +7,30 @@ function App() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [cart, setCart] = useState([]);
-  // const handeAddToCart = (item) => {
+
+  const handleAddToCart = (meal) => {
+    const newCart = [...cart];
+    let isInCart = false;
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].id === meal.id) {
+        console.log("test1");
+        isInCart = true;
+        newCart[i].quantity += 1;
+        newCart[i].price = Number(newCart[i].price) + Number(meal.price);
+
+        break;
+      }
+    }
+    if (!isInCart) {
+      newCart.push({
+        title: meal.title,
+        price: meal.price,
+        quantity: 1,
+        id: meal.id,
+      });
+    }
+    setCart(newCart);
+  };
 
   // };
 
@@ -51,29 +74,30 @@ function App() {
                           <div
                             className="plates"
                             onClick={() => {
-                              const newCart = [...cart];
-                              let isInCart = false;
-                              for (let i = 0; i < cart.length; i++) {
-                                if (cart[i].id === meal.id) {
-                                  console.log("test1");
-                                  isInCart = true;
-                                  newCart[i].quantity += 1;
-                                  newCart[i].price =
-                                    Number(newCart[i].price) +
-                                    Number(meal.price);
+                              handleAddToCart(meal);
+                              // const newCart = [...cart];
+                              // let isInCart = false;
+                              // for (let i = 0; i < cart.length; i++) {
+                              //   if (cart[i].id === meal.id) {
+                              //     console.log("test1");
+                              //     isInCart = true;
+                              //     newCart[i].quantity += 1;
+                              //     newCart[i].price =
+                              //       Number(newCart[i].price) +
+                              //       Number(meal.price);
 
-                                  break;
-                                }
-                              }
-                              if (!isInCart) {
-                                newCart.push({
-                                  title: meal.title,
-                                  price: meal.price,
-                                  quantity: 1,
-                                  id: meal.id,
-                                });
-                              }
-                              setCart(newCart);
+                              //     break;
+                              //   }
+                              // }
+                              // if (!isInCart) {
+                              //   newCart.push({
+                              //     title: meal.title,
+                              //     price: meal.price,
+                              //     quantity: 1,
+                              //     id: meal.id,
+                              //   });
+                              // }
+                              // setCart(newCart);
                               //
 
                               // newCart.push({
@@ -115,7 +139,7 @@ function App() {
         </div>
         <div className="container-2">
           <div className="cart">
-            <button>Valider mon panier</button>
+            <button className="valid-btn">Valider mon panier</button>
             {cart.length === 0 ? (
               <div>
                 <h3>Votre panier est vide</h3>

@@ -91,9 +91,9 @@ p {
   background: #f3f5f5;
 }
 
-.categories {
+/* .categories {
   border: red solid 2px;
-}
+} */
 .categories h2 {
   font-weight: bold;
 }
@@ -110,8 +110,6 @@ p {
 .plates {
   width: 49%;
   margin-bottom: 20px;
-  border: chartreuse dashed 2px;
-
   gap: 10px;
   box-sizing: border-box;
   border-radius: 5px;
@@ -180,4 +178,7 @@ p {
 }
 .cart {
   background-color: white;
+}
+.valid-btn {
+  font-size: 24px;
 }
