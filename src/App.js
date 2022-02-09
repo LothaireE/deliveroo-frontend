@@ -7,14 +7,9 @@ function App() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [cart, setCart] = useState([]);
+  // const handeAddToCart = (item) => {
 
-  const handeAddToCart = (item) => {
-    const newCart = [...cart];
-    newCart.push({ title: item.title, price: item.price });
-    setCart(newCart);
-    console.log("======>", item);
-    return console.log(newCart);
-  };
+  // };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,7 +51,38 @@ function App() {
                           <div
                             className="plates"
                             onClick={() => {
-                              handeAddToCart(meal);
+                              const newCart = [...cart];
+                              let isInCart = false;
+                              for (let i = 0; i < cart.length; i++) {
+                                if (cart[i].id === meal.id) {
+                                  console.log("test1");
+                                  isInCart = true;
+                                  newCart[i].quantity += 1;
+                                  newCart[i].price =
+                                    Number(newCart[i].price) +
+                                    Number(meal.price);
+
+                                  break;
+                                }
+                              }
+                              if (!isInCart) {
+                                newCart.push({
+                                  title: meal.title,
+                                  price: meal.price,
+                                  quantity: 1,
+                                  id: meal.id,
+                                });
+                              }
+                              setCart(newCart);
+                              //
+
+                              // newCart.push({
+                              //   title: meal.title,
+                              //   price: meal.price,
+                              //   quantity: 1,
+
+                              //   id: meal.id,
+                              // });
                             }}
                             key={deudex}
                           >
@@ -89,21 +115,27 @@ function App() {
         </div>
         <div className="container-2">
           <div className="cart">
-            {cart.map((shoppingCart, index3) => {
-              console.log(shoppingCart);
-              return cart.length < 1 ? (
-                <div>
-                  <p>what I really want !</p>
-                </div>
-              ) : (
-                <div key={index3}>
-                  <div>
-                    <p>{shoppingCart.title}</p>
-                    <p>{shoppingCart.price}</p>
+            <button>Valider mon panier</button>
+            {cart.length === 0 ? (
+              <div>
+                <h3>Votre panier est vide</h3>
+              </div>
+            ) : (
+              cart.map((meal, index3) => {
+                return (
+                  <div key={index3}>
+                    <div></div>
+
+                    <div>
+                      <p>{meal.title}</p>
+                      <p>{meal.price}</p>
+                      <p>{meal.quantity}</p>
+                      {/* <p>{shoppingCart.quantity}</p> */}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </div>
       </div>
