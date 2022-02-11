@@ -32,7 +32,7 @@ function App() {
     setCart(newCart);
   };
 
-  // };
+  // jfeiopzzhior};
 
   useEffect(() => {
     const fetchData = async () => {
